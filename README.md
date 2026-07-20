@@ -19,3 +19,13 @@
 2. Zobaczyć listę swoich zadań
 3. Uruchomić timer zadania
 4. Widzieć dzienny progres
+
+### Backlog
+- V2
+* notatki podczas zadania
+* streaki
+* statystyki tygodniowe
+- V3
+* przypomnienia
+* kalendarz
+* synchronizacja
