@@ -3,29 +3,38 @@
 ## Product Discovery
 
 ### Persona
-👤 Anna, 32 lata
-* dużo spotkań,
-* telefon zawsze przy sobie,
-* mało czasu,
-* chce wykorzystać krótkie przerwy,
-* często myśli:
-> 'Co ja miałam teraz zrobić?'
+👤 Anna, 32 yo
+* lots of meetings,
+* always has her phone with her,
+* doesn't have much time,
+* wants to take advantage of short breaks,
+* often thinks:
+> 'What was I supposed to do now?'
 
 ### Problem
-> 'W ciągu dnia mam dużo małych okien czasowych, ale nie wiem, na czym się skupić i tracę poczucie postępu.'
+> 'I have a lot of short breaks during the day, but I don't know what to focus on and I lose my sense of progress.'
+
+### Goal
+Help busy professionals focus on the next most important task and visualize their daily progress.
 
 ### MVP
-1. Dodać zadanie
-2. Zobaczyć listę swoich zadań
-3. Uruchomić timer zadania
-4. Widzieć dzienny progres
+1. Create tasks
+2. Organize today's work
+3. Start and complete focus sessions
+4. Track daily progresss
+
+### Success Criteria
+A user can:
+- create a task in under 30 seconds
+- start a focus session with one click
+- immediately see today's progress
 
 ### Backlog
-- V2
-* notatki podczas zadania
-* streaki
-* statystyki tygodniowe
-- V3
-* przypomnienia
-* kalendarz
-* synchronizacja
+V2
+* notes during the task
+* streaks
+* weekly statistics
+V3
+* reminders
+* calendar
+* synchronization
