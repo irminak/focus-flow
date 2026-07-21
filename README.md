@@ -1,77 +1,44 @@
-# React + TypeScript + Vite
+# Focus Flow app
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Product Discovery
 
-Currently, two official plugins are available:
+### Persona
+👤 Anna, 32 yo
+* lots of meetings,
+* always has her phone with her,
+* doesn't have much time,
+* wants to take advantage of short breaks,
+* often thinks:
+> 'What was I supposed to do now?'
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+### Problem
+> 'I have a lot of short breaks during the day, but I don't know what to focus on and I lose my sense of progress.'
 
-## React Compiler
+### Goal
+Help busy professionals focus on the next most important task and visualize their daily progress.
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+### MVP
+1. Create tasks
+2. Organize today's work
+3. Start and complete focus sessions
+4. Track daily progresss
 
-Note: This will impact Vite dev & build performances.
+### Success Criteria
+A user can:
+- create a task in under 30 seconds
+- start a focus session with one click
+- immediately see today's progress
 
-## Expanding the ESLint configuration
+### Backlog
+V2
+* notes during the task
+* streaks
+* weekly statistics
+V3
+* reminders
+* calendar
+* synchronization
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### Lo-Fi Wireframes
+<img width="1536" height="1024" alt="bf2fc687-bf8f-4393-bfa9-204e409d1f9a" src="https://github.com/user-attachments/assets/4ba8bb45-6d53-4fae-bea5-4662d52c93f9" />
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
