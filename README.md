@@ -38,3 +38,6 @@ V3
 * reminders
 * calendar
 * synchronization
+
+### Lo-Fi Wireframes
+<img width="568" height="364" alt="Zrzut ekranu 2026-07-20 o 20 05 25" src="https://github.com/user-attachments/assets/37a03a3a-8606-42c8-8f31-df5c3a718774" />
