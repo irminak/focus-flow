@@ -40,4 +40,5 @@ V3
 * synchronization
 
 ### Lo-Fi Wireframes
-<img width="568" height="364" alt="Zrzut ekranu 2026-07-20 o 20 05 25" src="https://github.com/user-attachments/assets/37a03a3a-8606-42c8-8f31-df5c3a718774" />
+<img width="1536" height="1024" alt="bf2fc687-bf8f-4393-bfa9-204e409d1f9a" src="https://github.com/user-attachments/assets/4ba8bb45-6d53-4fae-bea5-4662d52c93f9" />
+
