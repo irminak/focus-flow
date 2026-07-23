@@ -42,3 +42,9 @@ V3
 ### Lo-Fi Wireframes
 <img width="1536" height="1024" alt="bf2fc687-bf8f-4393-bfa9-204e409d1f9a" src="https://github.com/user-attachments/assets/4ba8bb45-6d53-4fae-bea5-4662d52c93f9" />
 
+Notes:
+
+Current MVP assumption:
+All tasks belong to the current day.
+Future version:
+Progress will be calculated only for tasks scheduled for today.

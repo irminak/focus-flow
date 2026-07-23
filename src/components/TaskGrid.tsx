@@ -1,11 +1,11 @@
 import type { Task } from '../types/task'
 import TaskCard from './TaskCard'
 
-const TaskGrid = ({tasks}: { tasks: Task[] }) => {
+const TaskGrid = ({tasks, onCompleteTask}: { tasks: Task[]; onCompleteTask: (taskId: number) => void }) => {
   return (
     <ul>
         {tasks.map((task) =>
-            <TaskCard key={task.id} task={task}/>
+            <TaskCard key={task.id} task={task} onCompleteTask={onCompleteTask}/>
         )}
     </ul>
   )

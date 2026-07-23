@@ -9,13 +9,18 @@ const App = () => {
 
   const addTask = (task: Task) => {
     setTasks((previousTasks) => [...previousTasks, task]);
-    console.log(tasks);
   }
+
+  const completeTask = (taskId: number) => {
+    setTasks((previousTask) => previousTask.map((task) =>
+      task.id === taskId  ? { ...task, completed: !task.completed } : task
+    )); 
+  };
 
   return (
     <div>
       <TaskForm onAddTask={addTask} />
-      <TaskGrid tasks={tasks}/>
+      <TaskGrid tasks={tasks} onCompleteTask={completeTask} />
     </div>
   )
 }
