@@ -33,7 +33,7 @@ const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
         category,
         duration: Number(duration),
         deadline: "",
-        completed: false
+        status: 'todo'
     };
    
     onAddTask(newTask);
