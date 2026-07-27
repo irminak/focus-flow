@@ -33,7 +33,7 @@ const App = () => {
 
   return (
     <div>
-      {selectedTaskId !== null ? <FocusView handleGoBack={handleGoBack} currentTask={currentTask}/> :
+      {selectedTaskId !== null ? <FocusView handleGoBack={handleGoBack} task={currentTask}/> :
         <div>
           <ProgressBar progress={countProgress(tasks)} />
           <TaskForm onAddTask={addTask} />

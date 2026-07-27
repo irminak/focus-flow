@@ -5,6 +5,7 @@ import type { FormErrors } from '../types/errors';
 
 const TaskForm = ({ onAddTask }: { onAddTask: (task: Task) => void }) => {
 const [title, setTitle] = useState('');
+const [description, setDescription] = useState('');
 const [category, setCategory] = useState('');
 const [duration, setDuration] = useState('');
 
@@ -49,7 +50,10 @@ const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
                 <input type="text" id="title" value={title} onChange={(e) => setTitle(e.target.value)}/>
                 {errors.title && <p style={{ color: 'red' }}>{errors.title}</p>}
             </div>
-            
+            <div>
+                <label htmlFor="description">Description</label>
+                <input type="text" id="description" value={description} onChange={(e) => setDescription(e.target.value)}/>
+            </div>
              <div>
                 <label htmlFor="category">Category</label>
                 <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
