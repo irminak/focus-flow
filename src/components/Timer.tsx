@@ -1,10 +1,8 @@
 import { useState, useEffect } from "react";
 import type { Task } from "../types/task";
-const Timer = ({ task }: { task: Task }) => {
+const Timer = ({ task, onFinish }: { task: Task; onFinish: () => void }) => {
      const [remainingTime, setRemainingTime] = useState(task ? task.duration * 60 : 0); // in seconds
         const [isRunning, setIsRunning] = useState(false);
-        const [isFinished, setIsFinished] = useState(false);
-
          const toggleTimer = () => {
         setIsRunning(previousState => !previousState);
     };
@@ -14,7 +12,8 @@ const Timer = ({ task }: { task: Task }) => {
         const interval = setInterval(() => {
             setRemainingTime((prevTime) => {
                 if ( prevTime <= 1 ){
-                    setIsFinished(true);
+                    setIsRunning(false);
+                    onFinish();
                     return 0;
                 }
                 return prevTime - 1;
@@ -24,7 +23,7 @@ const Timer = ({ task }: { task: Task }) => {
         return () => clearInterval(interval);
     }, [isRunning]);
 
-    const focusedTime = task.duration * 60 - remainingTime;
+    // const focusedTime = task.duration * 60 - remainingTime;
 
   return (
     <div>
