@@ -3,14 +3,33 @@ import type { Task } from "../types/task";
 import type { SessionEndReason } from "../types/session";
 import SessionSummaryView from "./SessionSummaryView";
 
-const FocusView = ({ task, handleGoBack }: { task: Task; handleGoBack: () => void }) => { 
+const FocusView = ({ task, handleGoBack, onComplete, onStart }: { task: Task; handleGoBack: () => void; onComplete: (taskId: number) => void; onStart: (taskId: number) => void; }) => { 
     const [isRunning, setIsRunning] = useState(false);
     const [remainingTime, setRemainingTime] = useState(task ? task.duration * 60 : 0); // in seconds
     const [isFinished, setIsFinished] = useState(false);
     const [sessionEndReason, setSessionEndReason] = useState<SessionEndReason | null>(null);   
     
+    const handleStart =() => {
+        setIsRunning(true);
+        onStart(task.id);
+    }
+
     const toggleTimer = () => {
-        setIsRunning(previousState => !previousState);}
+        setIsRunning(previousState => !previousState);
+    }
+
+    const handleFinishSession = (reason: SessionEndReason) => {
+        setSessionEndReason(reason);
+        setIsFinished(true);
+        setIsRunning(false);
+    }
+
+    const resumeSession = () => {
+        setIsFinished(false);
+        setSessionEndReason(null);
+        setRemainingTime(task.duration * 60);
+        setIsRunning(false);
+    }
 
     useEffect(() => {
     if (!isRunning) return;
@@ -19,8 +38,7 @@ const FocusView = ({ task, handleGoBack }: { task: Task; handleGoBack: () => voi
         setRemainingTime(prevTime => {
             if (prevTime <= 1) {
                 setIsRunning(false);
-                setSessionEndReason("timeout");
-                setIsFinished(true);
+                handleFinishSession('timeout');
                 return 0;
             }
 
@@ -30,6 +48,7 @@ const FocusView = ({ task, handleGoBack }: { task: Task; handleGoBack: () => voi
 
     return () => clearInterval(interval);
 }, [isRunning]);
+
   return (
     <div>
         <button onClick={handleGoBack}>Go back</button>
@@ -37,20 +56,19 @@ const FocusView = ({ task, handleGoBack }: { task: Task; handleGoBack: () => voi
                 <h3>{task.title}</h3>
                 <p>Category: {task.category}</p>
                 {isFinished ? (
-                    <SessionSummaryView sessionEndReason={sessionEndReason} />
+                    <SessionSummaryView sessionEndReason={sessionEndReason} task={task} remainingTime={remainingTime} onResume={resumeSession} onComplete={onComplete} />
                 ):(
                 <div>
                     <div>
                         <h3>{Math.floor(remainingTime / 60)}:{String(remainingTime % 60).padStart(2, '0')}</h3>
                         <p> of {task.duration} minutes</p>
-                        <button onClick={toggleTimer}>
-                            {isRunning ? "Pause Focus" : "Start Focus"}
-                        </button>
+                        {task.status === 'todo' || task.status === 'completed' ? (<button onClick={handleStart}>Start</button> ): (<button onClick={toggleTimer}>
+                            {isRunning ? "Pause" : "Resume"}
+                        </button>)}
                     </div>
                     <p>Description: {task.description}</p>
                     <button onClick={() => {
-                        setSessionEndReason('manual');
-                        setIsFinished(true);
+                        handleFinishSession('manual');
                     }}>
                         End session
                     </button>

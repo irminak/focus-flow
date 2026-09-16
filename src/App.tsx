@@ -27,13 +27,22 @@ const App = () => {
 
   const currentTask = tasks.find((t) => t.id === selectedTaskId);
 
+  const startTask = (taskId: number) => {
+    setTasks((prevTasks) => prevTasks.map((task) => task.id === taskId ? { ...task, status: 'in-progress' } : task));
+  }
+
+  const completeTask = (taskId: number) => {
+    setTasks((prevTask) => prevTask.map((task) => task.id === taskId ? { ...task, status: 'completed' } : task));
+    setSelectedTaskId(null);
+  }
+
   const handleGoBack = () => {
     setSelectedTaskId(null);
   }
 
   return (
     <div>
-      {selectedTaskId !== null ? <FocusView handleGoBack={handleGoBack} task={currentTask}/> :
+      {currentTask ? <FocusView handleGoBack={handleGoBack} task={currentTask} onComplete={completeTask} onStart={startTask}/> :
         <div>
           <ProgressBar progress={countProgress(tasks)} />
           <TaskForm onAddTask={addTask} />
