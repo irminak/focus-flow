@@ -31,8 +31,18 @@ const App = () => {
     setTasks((prevTasks) => prevTasks.map((task) => task.id === taskId ? { ...task, status: 'in-progress' } : task));
   }
 
+  const resumeTask = (taskId: number) => {
+    setTasks((prevTasks) => prevTasks.map((task) => task.id === taskId ? { ...task, status: 'todo' } : task));
+  }
+
   const completeTask = (taskId: number) => {
     setTasks((prevTask) => prevTask.map((task) => task.id === taskId ? { ...task, status: 'completed' } : task));
+    setSelectedTaskId(null);
+  }
+
+  const continueTaskLater = (taskId: number, remainingTime: number) => {
+    setTasks((prevTasks) => prevTasks.map((task) => task.id === taskId ? { ...task, status: 'in-progress' } : task));
+    setTasks((prevTasks) => prevTasks.map((task) => task.id === taskId ? { ...task, duration: remainingTime / 60 } : task));
     setSelectedTaskId(null);
   }
 
@@ -42,7 +52,7 @@ const App = () => {
 
   return (
     <div>
-      {currentTask ? <FocusView handleGoBack={handleGoBack} task={currentTask} onComplete={completeTask} onStart={startTask}/> :
+      {currentTask ? <FocusView handleGoBack={handleGoBack} task={currentTask} onComplete={completeTask} onStart={startTask} onResume={resumeTask} onContinueLater={continueTaskLater}/> :
         <div>
           <ProgressBar progress={countProgress(tasks)} />
           <TaskForm onAddTask={addTask} />

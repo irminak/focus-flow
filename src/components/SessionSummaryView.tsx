@@ -1,6 +1,6 @@
 import type { SessionEndReason } from "../types/session";
 import type { Task } from "../types/task";
-const SessionSummaryView = ({ sessionEndReason, task, remainingTime, onResume, onComplete }: { sessionEndReason: SessionEndReason | null; task: Task; remainingTime: number ; onResume: () => void; onComplete: (taskId: number) => void }) => {
+const SessionSummaryView = ({ sessionEndReason, task, remainingTime, onResume, onComplete, onContinueLater }: { sessionEndReason: SessionEndReason | null; task: Task; remainingTime: number ; onResume: () => void; onComplete: (taskId: number) => void; onContinueLater: (taskId: number, remainingTime: number) => void }) => {
     // trzeba przekazac jak zostala zakonczona sesja (end czy timeout) oraz ile czasu pracowalismy
 
     const workedSeconds = task.duration * 60 - remainingTime;
@@ -24,7 +24,7 @@ const SessionSummaryView = ({ sessionEndReason, task, remainingTime, onResume, o
             </p>
             <p>Did You complete the task?</p>
             <button onClick={() => onComplete(task.id)}>Mark task as done</button>
-            <button>Continue later </button>
+            <button onClick={() => onContinueLater(task.id, remainingTime)}>Continue later </button>
         </div>
     ) : (<div>null</div>)} 
     </>
