@@ -33,26 +33,29 @@ const App = () => {
 
   const resumeTask = (taskId: number) => {
     setTasks((prevTasks) => prevTasks.map((task) => task.id === taskId ? { ...task, status: 'todo' } : task));
+    setTasks((prevTasks) => prevTasks.map((task) => task.id === taskId ? { ...task, remainingTime: 0 } : task));
   }
 
   const completeTask = (taskId: number) => {
     setTasks((prevTask) => prevTask.map((task) => task.id === taskId ? { ...task, status: 'completed' } : task));
+    setTasks((prevTasks) => prevTasks.map((task) => task.id === taskId ? { ...task, remainingTime: 0 } : task));
     setSelectedTaskId(null);
+
   }
+
 
   const continueTaskLater = (taskId: number, remainingTime: number) => {
-    setTasks((prevTasks) => prevTasks.map((task) => task.id === taskId ? { ...task, status: 'in-progress' } : task));
-    setTasks((prevTasks) => prevTasks.map((task) => task.id === taskId ? { ...task, duration: remainingTime / 60 } : task));
+    setTasks((prevTasks) => prevTasks.map((task) => task.id === taskId ? { ...task, remainingTime: remainingTime } : task));
     setSelectedTaskId(null);
   }
 
-  const handleGoBack = () => {
-    setSelectedTaskId(null);
-  }
+  // const handleGoBack = () => {
+  //   setSelectedTaskId(null);
+  // }
 
   return (
     <div>
-      {currentTask ? <FocusView handleGoBack={handleGoBack} task={currentTask} onComplete={completeTask} onStart={startTask} onResume={resumeTask} onContinueLater={continueTaskLater}/> :
+      {currentTask ? <FocusView task={currentTask} onComplete={completeTask} onStart={startTask} onResume={resumeTask} onContinueLater={continueTaskLater} /> :
         <div>
           <ProgressBar progress={countProgress(tasks)} />
           <TaskForm onAddTask={addTask} />

@@ -6,7 +6,7 @@ import type { FormErrors } from '../types/errors';
 const TaskForm = ({ onAddTask }: { onAddTask: (task: Task) => void }) => {
 const [title, setTitle] = useState('');
 const [description, setDescription] = useState('');
-const [category, setCategory] = useState('');
+const [category, setCategory] = useState('Choose a category');
 const [duration, setDuration] = useState('');
 
 const [errors, setErrors] = useState<FormErrors>({});
@@ -17,7 +17,7 @@ const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
     const validationErrors: FormErrors = {};
     if (!title.trim()){
         validationErrors.title = "Title is required";
-    } if (!category.trim()){
+    } if (category === "Choose a category") {
         validationErrors.category = "Category is required";
     } if (!duration.trim() || isNaN(Number(duration)) || Number(duration) <= 0){
         validationErrors.duration = "Duration must be a positive number";
@@ -33,6 +33,7 @@ const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
         title,
         category,
         duration: Number(duration),
+        remainingTime: 0,
         deadline: "",
         status: 'todo'
     };
@@ -57,6 +58,7 @@ const handleAddTask = (e: React.FormEvent<HTMLFormElement>) => {
              <div>
                 <label htmlFor="category">Category</label>
                 <select id="category" value={category} onChange={(e) => setCategory(e.target.value)}>
+                    <option value="Choose a category" disabled>Choose a category</option>
                     {categories.map((cat) => (
                         <option key={cat} value={cat}>
                             {cat}

@@ -9,6 +9,7 @@ const TaskCard = ({task, onSelectTask}: { task: Task; onSelectTask: (taskId: num
         <p>Duration: {task.duration} minutes</p>
         <p>Deadline: {task.deadline}</p>
         <p>Status: {task.status}</p>
+        <p>Remaining Time: {task.remainingTime} seconds</p>
     </li>
   )
 }

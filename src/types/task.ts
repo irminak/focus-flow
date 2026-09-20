@@ -4,7 +4,7 @@ export type Task = {
     description?: string;
     category: string; 
     duration: number; 
-    remainingTime?: number;
+    remainingTime: number;
     deadline: string; 
     status: 'todo' | 'in-progress' | 'completed';
 }

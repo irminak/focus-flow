@@ -3,9 +3,9 @@ import type { Task } from "../types/task";
 import type { SessionEndReason } from "../types/session";
 import SessionSummaryView from "./SessionSummaryView";
 
-const FocusView = ({ task, handleGoBack, onComplete, onStart, onResume, onContinueLater }: { task: Task; handleGoBack: () => void; onComplete: (taskId: number) => void; onStart: (taskId: number) => void; onResume: (taskId: number) => void; onContinueLater: (taskId: number, remainingTime: number) => void }) => { 
+const FocusView = ({ task, onComplete, onStart, onResume, onContinueLater }: { task: Task; onComplete: (taskId: number) => void; onStart: (taskId: number) => void; onResume: (taskId: number) => void; onContinueLater: (taskId: number, remainingTime: number) => void; }) => { 
     const [isRunning, setIsRunning] = useState(false);
-    const [remainingTime, setRemainingTime] = useState(task ? task.duration * 60 : 0); // in seconds
+    const [remainingTime, setRemainingTime] = useState(task.remainingTime > 0 ? task.remainingTime : task.duration * 60 ); // in seconds
     const [isFinished, setIsFinished] = useState(false);
     const [sessionEndReason, setSessionEndReason] = useState<SessionEndReason | null>(null);   
     
@@ -33,11 +33,10 @@ const FocusView = ({ task, handleGoBack, onComplete, onStart, onResume, onContin
     }
 
     const handleContinueLater = () => {
+        onContinueLater(task.id, remainingTime);
         setIsFinished(false);
         setSessionEndReason(null);
-        setRemainingTime(remainingTime);
         setIsRunning(false);
-        onContinueLater(task.id, remainingTime);
     }
 
     useEffect(() => {
@@ -60,7 +59,7 @@ const FocusView = ({ task, handleGoBack, onComplete, onStart, onResume, onContin
 
   return (
     <div>
-        <button onClick={handleGoBack}>Go back</button>
+        {/* <button onClick={handleGoBack}>Go back</button> */}
         <div>Current task</div>
                 <h3>{task.title}</h3>
                 <p>Category: {task.category}</p>
