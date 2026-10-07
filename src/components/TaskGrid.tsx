@@ -3,7 +3,7 @@ import TaskCard from './TaskCard'
 
 const TaskGrid = ({tasks, onSelectTask}: { tasks: Task[];  onSelectTask: (taskId: number) => void }) => {
   return (
-    <ul>
+    <ul className='task-grid'>
         {tasks.map((task) =>
             <TaskCard key={task.id} task={task} onSelectTask={onSelectTask}/>
         )}

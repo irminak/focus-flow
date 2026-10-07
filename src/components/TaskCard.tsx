@@ -3,13 +3,10 @@ import type { Task } from "../types/task"
 const TaskCard = ({task, onSelectTask}: { task: Task; onSelectTask: (taskId: number) => void}) => {
 
   return (
-    <li style={{border: '1px solid #ccc'}} onClick={() => onSelectTask(task.id)}>
-        <h3>{task.title}</h3>
-        <p>Category: {task.category}</p>
-        <p>Duration: {task.duration} minutes</p>
-        <p>Deadline: {task.deadline}</p>
-        <p>Status: {task.status}</p>
-        <p>Remaining Time: {task.remainingTime} seconds</p>
+    <li className="task-card" onClick={() => onSelectTask(task.id)}>
+        <h3 className="task-card__title">{task.title}</h3>
+        <p className="task-card__category">{task.category}</p>
+        {task.remainingTime != 0 ? <p className="task-card__time">{task.remainingTime} seconds</p> :  <p className="task-card__time">{task.duration} minutes</p>}
     </li>
   )
 }
